@@ -28,9 +28,9 @@ class Robot {
 
     recharge(){
         if(this.#batteryLvl < 100){
-          const powerNeeded = 100- this.#batteryLvl;
-          this.#batteryLvl += powerNeeded;
+          this.#batteryLvl = 100;
         }
+        return `${this.constructor.name} is fully charged`;
     }
 
     status() {
@@ -80,18 +80,35 @@ class WarehouseHub {
             console.log(bot.status());
         }
     }
+
+    getStrandedRobots(){
+       const newBotList = this.botList.filter(bot => bot.battery < 15) || []
+       return newBotList;
+    }
+}
+
+class ChargingStation {
+    constructor(bot){
+        this.bot = bot;
+    }
+
+    serviceRobot(bot){
+        console.log(`Charging [${bot.id}] ... (${bot.battery}%)`)
+        bot.recharge();
+        console.log(`Charge Complete! (${bot.battery}%)` )
+    }
 }
 
 const loader1 = new Loader('l1', 4, 78)
-// console.log(loader1.work());
-loader1.recharge();
 
+const service = new ChargingStation(loader1);
+service.serviceRobot(loader1)
 const transporter1 = new Transporter('t1', 220, 78)
-// console.log(transporter1.work());
+
 
 let arrayOfBots = [];
 arrayOfBots.push(loader1, transporter1);
 
 const warehouse = new WarehouseHub(arrayOfBots);
-
 warehouse.operateAll();
+console.log(warehouse.getStrandedRobots());
