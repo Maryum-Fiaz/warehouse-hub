@@ -2,7 +2,7 @@
 
 // Goal: Build a system where robots perform tasks until they run out of energy, managed by a central hub.
 
-class Robot {
+export class Robot {
     #batteryLvl; // private class fields
 
     constructor(id, userBatteryValue) {
@@ -39,7 +39,7 @@ class Robot {
 
 }
 
-class Loader extends Robot {
+export class Loader extends Robot {
     constructor(id, battery, maxWeight) {
         super(id, battery);
         this.maxWeight = maxWeight;
@@ -54,7 +54,7 @@ class Loader extends Robot {
     }
 }
 
-class Transporter extends Robot {
+export class Transporter extends Robot {
     constructor(id, battery, speed) {
         super(id, battery);
         this.speed = speed;
@@ -69,46 +69,16 @@ class Transporter extends Robot {
     }
 }
 
-class WarehouseHub {
-    constructor(botList = []){
-        this.botList = botList
-    }
+// const loader1 = new Loader('l1', 4, 78)
 
-    operateAll(){
-        for(let bot of this.botList){
-            console.log(bot.work());
-            console.log(bot.status());
-        }
-    }
-
-    getStrandedRobots(){
-       const newBotList = this.botList.filter(bot => bot.battery < 15) || []
-       return newBotList;
-    }
-}
-
-class ChargingStation {
-    constructor(bot){
-        this.bot = bot;
-    }
-
-    serviceRobot(bot){
-        console.log(`Charging [${bot.id}] ... (${bot.battery}%)`)
-        bot.recharge();
-        console.log(`Charge Complete! (${bot.battery}%)` )
-    }
-}
-
-const loader1 = new Loader('l1', 4, 78)
-
-const service = new ChargingStation(loader1);
-service.serviceRobot(loader1)
-const transporter1 = new Transporter('t1', 220, 78)
+// const service = new ChargingStation(loader1);
+// service.serviceRobot(loader1)
+// const transporter1 = new Transporter('t1', 220, 78)
 
 
-let arrayOfBots = [];
-arrayOfBots.push(loader1, transporter1);
+// let arrayOfBots = [];
+// arrayOfBots.push(loader1, transporter1);
 
-const warehouse = new WarehouseHub(arrayOfBots);
-warehouse.operateAll();
-console.log(warehouse.getStrandedRobots());
+// const warehouse = new WarehouseHub(arrayOfBots);
+// warehouse.operateAll();
+// console.log(warehouse.getStrandedRobots());
