@@ -1,0 +1,175 @@
+:root {
+  --bg: #200f07;
+  --panel: rgba(255, 249, 235, 0.03); /* Translucent vanilla */
+  --text: #fff9eb;
+  --accent: #c5e384;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Courier New", monospace;
+  margin: 0;
+  overflow-x: hidden;
+  padding: 1rem;
+  position: relative;
+}
+
+/* Creating the scanline overlay */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    rgba(197, 227, 132, 0.03) 50%,
+    rgba(0, 0, 0, 0) 50%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.dashboard {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 20px;
+  padding: 20px;
+}
+
+#charging-station{
+    margin-top: 20px;
+}
+
+.zone {
+  background: var(--panel);
+  border-left: 3px solid var(--accent);
+  padding: 20px;
+  position: relative;
+}
+
+/* Adding corner brackets for a "Tactical" look */
+.zone::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  border-bottom: 2px solid var(--accent);
+  border-right: 2px solid var(--accent);
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  min-height: 500px;
+  border: 1px solid rgba(197, 227, 132, 0.3);
+  background: radial-gradient(circle at center, #2b1a10 0%, #200f07 100%);
+}
+
+button {
+  background: #000;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 10px;
+  margin-top: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: crosshair; /* Adds to the 'robot operator' feel */
+}
+
+button:hover {
+  background: var(--accent);
+  color: var(--bg);
+  box-shadow: 0 0 15px var(--accent);
+}
+
+.properties{
+  position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+
+}
+
+.model{
+  width: 300px;
+    padding: 20px;
+    background-color: var(--bg);
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Ensure the sidebar itself doesn't try to force width */
+    .sidebar {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.2rem;
+    }
+    
+    .zone {
+        padding: 15px;
+    }
+    
+    button {
+        width: 100%; /* Make buttons full-width for easier tapping */
+    }
+}
+
+
+/* The Robot Sprite */
+.robot-sprite {
+    width: 100px;
+    height: 100px;
+    background: #200F07; /* Midnight Espresso */
+    border: 2px solid #C5E384; /* Pistachio Frost */
+    position: relative;
+    transition: all 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* font-size: 50px; */
+}
+
+/* Loader Animation: Lifting */
+.lifting {
+    animation: lift-move 0.5s infinite alternate;
+}
+
+@keyframes lift-move {
+    from { transform: translateY(0); }
+    to { transform: translateY(-15px); border-width: 4px; }
+}
+
+/* Transporter Animation: Moving */
+.moving {
+    animation: slide-move 1s infinite linear;
+}
+
+@keyframes slide-move {
+    0% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    100% { transform: translateX(-5px); }
+}

@@ -1,16 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Javascript</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>
-        Javascript Practice
-    </h1>
-    <p>Check console for practice results...😎</p>
+    <header><h1>WAREHOUSE HUB: COMMAND CENTER</h1></header>
 
+    <main class="dashboard">
+        <section class="sidebar">
+            <div id="robot-house" class="zone">
+                <h2>ROBOT HOUSE</h2>
+                <button id="add-loader" class="addBot" data-type="loader">ADD LOADER</button>
+                <button id="add-transporter" class="addBot" data-type="transporter">ADD TRANSPORTER</button>
+            </div>
+            <div id="charging-station" class="zone">
+                <h2>CHARGING STATION</h2>
+                <p>DRAG & DROP TO CHARGE</p>
+            </div>
+        </section>
+
+        <section id="warehouse-floor" class="grid-container">
+            </section>
+    </main>
 
     <script type="module" src="js/main.js"></script>
 </body>

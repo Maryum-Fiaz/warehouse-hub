@@ -6,7 +6,7 @@ export class Robot {
     #batteryLvl; // private class fields
 
     constructor(id, userBatteryValue) {
-        this.id = id;
+        this.id = crypto.randomUUID();
         this.#batteryLvl = Math.min(Math.max(userBatteryValue,0), 100);
         // max value 100, min value 0
     }
@@ -40,9 +40,10 @@ export class Robot {
 }
 
 export class Loader extends Robot {
-    constructor(id, battery, maxWeight) {
+    constructor(id, battery, maxWeight, image) {
         super(id, battery);
         this.maxWeight = maxWeight;
+        this.image = image;
     }
 
     work() {
@@ -55,9 +56,10 @@ export class Loader extends Robot {
 }
 
 export class Transporter extends Robot {
-    constructor(id, battery, speed) {
+    constructor(id, battery, speed, image) {
         super(id, battery);
         this.speed = speed;
+        this.image = image;
     }
 
     work() {
@@ -68,17 +70,3 @@ export class Transporter extends Robot {
         return `ERROR: Transporter ${this.id} is stranded!`;
     }
 }
-
-// const loader1 = new Loader('l1', 4, 78)
-
-// const service = new ChargingStation(loader1);
-// service.serviceRobot(loader1)
-// const transporter1 = new Transporter('t1', 220, 78)
-
-
-// let arrayOfBots = [];
-// arrayOfBots.push(loader1, transporter1);
-
-// const warehouse = new WarehouseHub(arrayOfBots);
-// warehouse.operateAll();
-// console.log(warehouse.getStrandedRobots());

@@ -3,16 +3,68 @@ import { WarehouseHub } from "./classes/warehouse.js";
 import { ChargingStation } from "./classes/chargingStation.js";
 
 
-const loader1 = new Loader('l1', 4, 78)
+const warehouseFloor = document.getElementById('warehouse-floor');
+const addLoader = document.getElementById('add-loader');
+const addTransporter = document.getElementById('add-transporter');
+const robotHouse = document.getElementById('robot-house');
+const addBot = document.querySelectorAll('.addBot');
 
-const service = new ChargingStation(loader1);
-service.serviceRobot(loader1)
-const transporter1 = new Transporter('t1', 220, 78)
+
+const robotRequirements = {
+    loader: { class: Loader, label: "Max Weight (kg)", prop: "maxWeight" },
+    transporter: { class: Transporter, label: "speed (km/h)", prop: "speed" },
+}
+
+// Function to add bot
+function addRobot(name) {
+
+    const config = robotRequirements[name]; //accessing property of object using a variable
+
+    const inputDiv = document.createElement('div');
+
+    inputDiv.classList.add('properties');
+    inputDiv.innerHTML = `
+    <div class= "model">
+    <h3>Initializing ${name.toUpperCase()} </h3>
+    <input type="number" id="robot-spec" placeholder="Enter value...">
+    <button id="confirm-bot">BUILD ROBOT</button>
+    </div>
+    `
+
+    document.body.appendChild(inputDiv);
+    console.log(`${name} clicked!`);
+    
+    document.getElementById('confirm-bot').onclick = () => {
+        const specValue = document.getElementById('robot-spec').value;
+        if(!specValue) return alert("Please enter a value!");
 
 
-let arrayOfBots = [];
-arrayOfBots.push(loader1, transporter1);
+        const botInstance = new config.class(null, 100, specValue);
+        console.log("Success:", botInstance.status());
+        
+        // Final Step: Show it on the floor
+        renderRobotToFloor(botInstance);
+        
+        // Remove the input box
+        inputDiv.remove();
+        
+    }
 
-const warehouse = new WarehouseHub(arrayOfBots);
-warehouse.operateAll();
-console.log(warehouse.getStrandedRobots());
+}
+
+// event listener to allow choose bots
+robotHouse.addEventListener('click', (e) => {
+    if(e.target.classList.contains('addBot')){
+        const type = e.target.dataset.type;
+        
+        addRobot(type)
+    }
+    
+})
+
+
+
+function renderRobotToFloor(botInstance){
+    console.log(`I am a function to render ${botInstance}`);
+    
+}
