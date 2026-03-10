@@ -18,7 +18,7 @@ export function addRobot(name) {
     inputDiv.innerHTML = `
     <div class= "model">
     <h3>Initializing ${name.toUpperCase()} </h3>
-    <input type="number" id="robot-spec" placeholder="Enter value...">
+    <input type="number" id="robot-spec" placeholder="Enter ${config.label}">
     <button id="confirm-bot">BUILD ROBOT</button>
     </div>
     `

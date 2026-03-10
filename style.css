@@ -453,37 +453,38 @@ header h1 {
 */
 
 .tile {
-  border: 1px solid var(--bolt);
-  width: auto;
-  height: auto;
+    width: 100%;
+    height: 100%;
+    display: flex; /* Helps center the robot inside */
+    align-items: center;
+    justify-content: center;
 }
 
 .robot-sprite {
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, #1a2a3a, #0e1820);
+  /* background: linear-gradient(135deg, #1a2a3a, #0e1820);
   border: 1.5px solid var(--accent);
   border-radius: 3px;
-  color: var(--accent);
-  font-size: 0.55rem;
-  letter-spacing: 0.08em;
+  color: var(--accent); */
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 2px;
   cursor: grab;
-  box-shadow:
+  /* box-shadow:
     0 0 10px rgba(58, 143, 255, 0.3),
     inset 0 0 8px rgba(0, 0, 0, 0.4);
-  transition: box-shadow 0.15s;
+  transition: box-shadow 0.15s; */
 }
 
-.robot-sprite:hover {
+/* .robot-sprite:hover {
   box-shadow:
     0 0 20px rgba(58, 143, 255, 0.55),
     inset 0 0 8px rgba(0, 0, 0, 0.4);
-}
+} */
 
 .robot-sprite:active {
   cursor: grabbing;
@@ -494,6 +495,13 @@ header h1 {
     max-height: 60%;
     object-fit: contain; /* Keeps the aspect ratio so it doesn't look stretched */
     display: block;
+    transition: box-shadow 0.15s;
+}
+
+.robot-sprite img:hover {
+  box-shadow:
+    0 0 20px rgba(58, 143, 255, 0.55),
+    inset 0 0 8px rgba(0, 0, 0, 0.4);
 }
 
 /* ─── UTILITY ────────────────────────────────────────────────────────
