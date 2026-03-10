@@ -39,7 +39,7 @@ function addRobot(name) {
         if(!specValue) return alert("Please enter a value!");
 
 
-        const botInstance = new config.class(null, 100, specValue);
+        const botInstance = new config.class(null, 100, specValue, `/assets/${name}.png`);
         console.log("Success:", botInstance.status());
         
         // Final Step: Show it on the floor
@@ -64,7 +64,37 @@ robotHouse.addEventListener('click', (e) => {
 
 
 
+// function to show robots
 function renderRobotToFloor(botInstance){
+
+    const tiles = document.querySelectorAll('.tile');
+
+    for(let tile of tiles){
+        if(!tile.classList.contains('occupied')){
+
+            tile.classList.add('occupied');
+            
+            const robot = document.createElement('div');
+            robot.className = 'robot-sprite';
+            robot.innerHTML = `
+            <img src="${botInstance.image}" alt="${botInstance.constructor.name}">
+            `;
+
+            tile.appendChild(robot)
+            return;
+        }
+    }
     console.log(`I am a function to render ${botInstance}`);
     
 }
+
+// function to add cells on grid floor
+function createCells() {
+
+    for(let i=0; i<25; i++){
+        const cell = document.createElement('div');
+        cell.classList.add('tile');
+        warehouseFloor.appendChild(cell)
+    }
+}
+createCells()

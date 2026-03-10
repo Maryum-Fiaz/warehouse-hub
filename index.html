@@ -1,28 +1,45 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+  <head>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <header><h1>WAREHOUSE HUB: COMMAND CENTER</h1></header>
 
     <main class="dashboard">
-        <section class="sidebar">
-            <div id="robot-house" class="zone">
-                <h2>ROBOT HOUSE</h2>
-                <button id="add-loader" class="addBot" data-type="loader">ADD LOADER</button>
-                <button id="add-transporter" class="addBot" data-type="transporter">ADD TRANSPORTER</button>
-            </div>
-            <div id="charging-station" class="zone">
-                <h2>CHARGING STATION</h2>
-                <p>DRAG & DROP TO CHARGE</p>
-            </div>
-        </section>
+      <section class="sidebar">
+        <div id="robot-house" class="zone">
+          <!-- for styling bolts -->
+          <span class="bolt tl"></span>
+          <span class="bolt tr"></span>
+          <span class="bolt bl"></span>
+          <span class="bolt br"></span>
+          <h2>ROBOT HOUSE</h2>
+          <button id="add-loader" class="addBot" data-type="loader">
+            ADD LOADER
+          </button>
+          <button id="add-transporter" class="addBot" data-type="transporter">
+            ADD TRANSPORTER
+          </button>
+        </div>
+        <div id="charging-station" class="zone">
+            <!-- for styling bolts -->
+          <span class="bolt tl"></span>
+          <span class="bolt tr"></span>
+          <span class="bolt bl"></span>
+          <span class="bolt br"></span>
+          <h2>CHARGING STATION</h2>
+          <p>DRAG & DROP TO CHARGE</p>
+        </div>
+        <div class="hidden" id="shift-btn">
+          <button id="start-shift" class="addBot">Start Shift</button>
+          <button id="end-shift" class="addBot">End Shift</button>
+        </div>
+      </section>
 
-        <section id="warehouse-floor" class="grid-container">
-            </section>
+      <section id="warehouse-floor" class="grid-container"></section>
     </main>
 
     <script type="module" src="js/main.js"></script>
-</body>
+  </body>
 </html>
