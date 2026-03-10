@@ -50,12 +50,19 @@ function renderRobotToFloor(botInstance){
     const tiles = document.querySelectorAll('.tile');
 
     for(let tile of tiles){
+        // chceking if tile is empty
         if(!tile.classList.contains('occupied')){
 
             tile.classList.add('occupied');
             
             const robot = document.createElement('div');
             robot.className = 'robot-sprite';
+
+            // title to show information about bot
+            const info = botInstance.constructor.name === 'Loader' ? `Weight: ${botInstance.maxWeight} kg (${botInstance.battery}%)` : `Speed: ${botInstance.speed} km/h (${botInstance.battery}%)`;
+
+            robot.setAttribute('title', `${info}`)
+
             robot.innerHTML = `
             <img src="${botInstance.image}" alt="${botInstance.constructor.name}">
             `;
