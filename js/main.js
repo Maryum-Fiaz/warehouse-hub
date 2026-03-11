@@ -72,16 +72,18 @@ warehouseFloor.addEventListener('click', (e) => {
                            if(result === 'ERROR'){
                             stopInterval(bot.id);
                             robotDiv.classList.remove('working-border')
-
+                            robotDiv.classList.add('critical-power');
+                            shiftBtn.remove();
                             alert(`Battery is ${bot.battery}`)
                            }
                         }, 3000)
 
                     }
                     else {
-                        shiftBtn.innerText = 'Start';
+                        // shiftBtn.innerText = 'Start';
                         stopInterval(bot.id)
                         robotDiv.classList.remove('working-border')
+                        shiftBtn.remove();
                     }
                     
                 })

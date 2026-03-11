@@ -1,3 +1,7 @@
+//  Two Functions
+//  1. Add Robots
+//  2. Render Robots on screen
+
 import { Robot, Loader, Transporter } from "./classes/robots.js";
 import { WarehouseHub } from "./classes/warehouse.js";
 import { ChargingStation } from "./classes/chargingStation.js";
@@ -67,7 +71,7 @@ function renderRobotToFloor(botInstance){
             
 
             // title to show information about bot
-            const info = botInstance.constructor.name === 'Loader' ? `Loading: ${botInstance.maxWeight} kg (${botInstance.battery}%)` : `Moving: ${botInstance.speed} km/h (${botInstance.battery}%)`;
+            const info = botInstance.constructor.name === 'Loader' ? `Lifting: ${botInstance.maxWeight} kg` : `Moving: ${botInstance.speed} km/h`;
 
             robot.setAttribute('title', `${info}`)
 
