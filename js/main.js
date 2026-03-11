@@ -78,7 +78,11 @@ warehouseFloor.addEventListener('click', (e) => {
                         }, 3000)
 
                     }
-                    console.log('btn clicked: ');
+                    else {
+                        shiftBtn.innerText = 'Start';
+                        stopInterval(bot.id)
+                        robotDiv.classList.remove('working-border')
+                    }
                     
                 })
             }
