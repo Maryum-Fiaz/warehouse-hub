@@ -51,7 +51,7 @@ export class Loader extends Robot {
         if (this.consumePower(10)) {
             return `Lifting ${this.maxWeight}kg...`;
         }
-        return `ERROR: Loader ${this.id} has insufficient power!`;
+        return `ERROR`;
     }
 }
 
@@ -67,6 +67,6 @@ export class Transporter extends Robot {
         if (this.consumePower(20)) {
             return `Driving at ${this.speed}km/h... (${this.battery}%)`;
         }
-        return `ERROR: Transporter ${this.id} is stranded!`;
+        return `ERROR`;
     }
 }

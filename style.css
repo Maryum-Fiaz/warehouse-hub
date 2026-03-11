@@ -312,24 +312,6 @@ header h1 {
   transform: scale(0.97);   /* subtle press-down feel */
 }
 
-
-/* ─── SHIFT BUTTONS ──────────────────────────────────────────────────
-   Hidden by default. JS removes 'hidden' class to reveal them.
-   The revealed state is a side-by-side flex row.
-*/
-#shift-btn {
-  display: none;
-}
-#shift-btn.visible {
-  display: flex;
-  gap: 10px;
-}
-#shift-btn .addBot {
-  flex: 1;
-  margin-top: 0;
-}
-
-
 /* ─── WAREHOUSE FLOOR ────────────────────────────────────────────────
    Same bolt technique as .zone (position:relative + .bolt children).
 
@@ -458,6 +440,7 @@ header h1 {
     display: flex; /* Helps center the robot inside */
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 .robot-sprite {
@@ -504,6 +487,50 @@ header h1 {
     inset 0 0 8px rgba(0, 0, 0, 0.4);
 }
 
+.shiftBtn{
+  display: flex;
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: var(--panel-bg);
+  border: 1px solid var(--accent);
+  /*Usingaccentforroboticglow*/color: var(--accent);
+  padding: 4px 9px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+
+.working-border {
+    /*Theborderandaheavyouterglowshadow*/border: 1.5px solid var(--accent);
+    box-shadow: 0 0 10px var(--accent), inset 0 0 5px var(--accent);
+    animation: glow-blink 2s ease-in-out infinite;
+    -webkit-animation: glow-blink 0.s ease-in-out infinite;
+}
+
+@keyframes glow-blink {
+    0% { 
+        opacity: 1; 
+        filter: brightness(1);
+        box-shadow: 0 0 5px var(--accent);
+    }
+    50% { 
+        opacity: 0.6; 
+        filter: brightness(1.5); /* Makes the blue/gray look "electric" */
+        box-shadow: 0 0 15px var(--accent); /* Shadow grows */
+    }
+    100% { 
+        opacity: 1; 
+        filter: brightness(1);
+        box-shadow: 0 0 5px var(--accent);
+    }
+}
+
 /* ─── UTILITY ────────────────────────────────────────────────────────
    Your HTML uses class="hidden" on #shift-btn.
    !important ensures nothing can override this display:none.
@@ -537,4 +564,29 @@ header h1 {
   header h1 {
     letter-spacing: 0.1em;
   }
+}
+
+
+/* Battery visual */
+/* The Low Battery Alert */
+.critical-power {
+    border-color: #ff4d4d !important;
+    box-shadow: 0 0 20px #ff4d4d !important;
+    animation: alert-blink 0.8s infinite;
+}
+
+@keyframes alert-blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.4; }
+    100% { opacity: 1; }
+}
+
+/* Add a little floating icon using ::after */
+.critical-power::after {
+    content: "⚠️ LOW BATT";
+    position: absolute;
+    top: -20px;
+    font-size: 0.6rem;
+    color: #ff4d4d;
+    white-space: nowrap;
 }

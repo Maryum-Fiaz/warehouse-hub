@@ -7,6 +7,8 @@ const robotRequirements = {
     transporter: { class: Transporter, label: "speed (km/h)", prop: "speed" },
 }
 
+export let activeBots = [];
+
 // Function to add bot
 export function addRobot(name) {
 
@@ -48,6 +50,8 @@ export function addRobot(name) {
 function renderRobotToFloor(botInstance){
 
     const tiles = document.querySelectorAll('.tile');
+    console.log(`I am a function to render ${botInstance.constructor.name}`);
+
 
     for(let tile of tiles){
         // chceking if tile is empty
@@ -58,8 +62,12 @@ function renderRobotToFloor(botInstance){
             const robot = document.createElement('div');
             robot.className = 'robot-sprite';
 
+            // dataset to class robot-sprite
+            robot.dataset.id = botInstance.id;
+            
+
             // title to show information about bot
-            const info = botInstance.constructor.name === 'Loader' ? `Weight: ${botInstance.maxWeight} kg (${botInstance.battery}%)` : `Speed: ${botInstance.speed} km/h (${botInstance.battery}%)`;
+            const info = botInstance.constructor.name === 'Loader' ? `Loading: ${botInstance.maxWeight} kg (${botInstance.battery}%)` : `Moving: ${botInstance.speed} km/h (${botInstance.battery}%)`;
 
             robot.setAttribute('title', `${info}`)
 
@@ -67,10 +75,11 @@ function renderRobotToFloor(botInstance){
             <img src="${botInstance.image}" alt="${botInstance.constructor.name}">
             `;
 
+            activeBots.push(botInstance);
             tile.appendChild(robot)
             return;
         }
     }
-    console.log(`I am a function to render ${botInstance}`);
     
 }
+
