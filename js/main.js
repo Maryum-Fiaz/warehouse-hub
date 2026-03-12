@@ -8,8 +8,9 @@ const addTransporter = document.getElementById("add-transporter");
 const robotHouse = document.getElementById("robot-house");
 const addBot = document.querySelectorAll(".addBot");
 
-console.log("active botsssss: ", activeBots);
+console.log("active bots: ", activeBots);
 
+// ************** EVENT LISTENERS  ****************
 // event listener to allow choose bots
 robotHouse.addEventListener("click", (e) => {
   if (e.target.classList.contains("addBot")) {
@@ -18,15 +19,6 @@ robotHouse.addEventListener("click", (e) => {
   }
 });
 
-// function to add cells on grid floor
-function createCells() {
-  for (let i = 0; i < 25; i++) {
-    const cell = document.createElement("div");
-    cell.classList.add("tile");
-    warehouseFloor.appendChild(cell);
-  }
-}
-createCells();
 
 let shiftBtn = "";
 warehouseFloor.addEventListener("click", (e) => {
@@ -61,3 +53,15 @@ warehouseFloor.addEventListener("click", (e) => {
   }
   return;
 });
+
+
+// ************** FUNCTIONS  ****************
+// function to add cells on grid floor
+function createCells() {
+  for (let i = 0; i < 25; i++) {
+    const cell = document.createElement("div");
+    cell.classList.add("tile");
+    warehouseFloor.appendChild(cell);
+  }
+}
+createCells();

@@ -1,3 +1,7 @@
+// three functions
+//     1. start bot to work
+//     2. stop bot working
+//     3. handle shift button Start/End functionality
 
 
 function stopInterval(id) {
