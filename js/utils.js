@@ -58,7 +58,7 @@ function renderRobotToFloor(botInstance){
 
 
     for(let tile of tiles){
-        // chceking if tile is empty
+        // checking if tile is empty
         if(!tile.classList.contains('occupied')){
 
             tile.classList.add('occupied');
