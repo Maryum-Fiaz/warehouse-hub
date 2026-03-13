@@ -15,7 +15,7 @@ function stopInterval(id) {
 // object to run multiple objects simultaneously and add with ID's as keys
 let botWorkInterval = {};
 
-function startBotWork(bot) {
+function startBotWork(shiftBtn, bot, robotDiv) {
     botWorkInterval[bot.id] = setInterval(() => {
                            const result = bot.work();
 
@@ -36,7 +36,7 @@ export function handleShiftToggle(shiftBtn, bot, robotDiv) {
     if(shiftBtn.innerText === 'Start'){
                         shiftBtn.innerText = 'End';
                         robotDiv.classList.add('working-border');
-                        startBotWork(bot)
+                        startBotWork(shiftBtn, bot, robotDiv)
                     }
                     else {
                         // shiftBtn.innerText = 'Start';

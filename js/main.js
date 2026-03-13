@@ -1,5 +1,6 @@
 import { addRobot, activeBots } from "./utils.js";
 import { handleShiftToggle } from "./controls.js";
+import { ChargingStation } from "./classes/chargingStation.js";
 import { WarehouseHub } from "./classes/warehouse.js";
 
 const warehouseFloor = document.getElementById("warehouse-floor");
@@ -7,6 +8,7 @@ const addLoader = document.getElementById("add-loader");
 const addTransporter = document.getElementById("add-transporter");
 const robotHouse = document.getElementById("robot-house");
 const addBot = document.querySelectorAll(".addBot");
+const chargingStation = document.getElementById('charging-station');
 
 console.log("active bots: ", activeBots);
 
@@ -50,6 +52,7 @@ warehouseFloor.addEventListener("click", (e) => {
       handleShiftToggle(shiftBtn, bot, robotDiv);
     });
     console.log("active botsssss 2nd time: ", activeBots);
+
   }
   return;
 });
@@ -64,4 +67,7 @@ function createCells() {
     warehouseFloor.appendChild(cell);
   }
 }
-createCells();
+
+createCells(); //function call
+
+
