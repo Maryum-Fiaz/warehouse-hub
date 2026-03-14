@@ -446,10 +446,6 @@ header h1 {
 .robot-sprite {
   width: 100%;
   height: 100%;
-  /* background: linear-gradient(135deg, #1a2a3a, #0e1820);
-  border: 1.5px solid var(--accent);
-  border-radius: 3px;
-  color: var(--accent); */
 
   display: flex;
   flex-direction: column;
@@ -457,17 +453,7 @@ header h1 {
   justify-content: center;
   gap: 2px;
   cursor: grab;
-  /* box-shadow:
-    0 0 10px rgba(58, 143, 255, 0.3),
-    inset 0 0 8px rgba(0, 0, 0, 0.4);
-  transition: box-shadow 0.15s; */
 }
-
-/* .robot-sprite:hover {
-  box-shadow:
-    0 0 20px rgba(58, 143, 255, 0.55),
-    inset 0 0 8px rgba(0, 0, 0, 0.4);
-} */
 
 .robot-sprite:active {
   cursor: grabbing;
@@ -553,6 +539,36 @@ header h1 {
     font-size: 0.6rem;
     color: #ff4d4d;
     white-space: nowrap;
+}
+
+.robot-sprite.charged {
+  border: 1.5px solid #3cff7a;
+  box-shadow: 0 0 18px rgba(60, 255, 122, 0.55);
+}
+
+#charging-station {
+  position: relative;
+}
+
+.charge-result {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(60, 255, 122, 0.6);
+  padding: 8px 12px;
+  border-radius: 8px;
+  color: #3cff7a;
+  font-size: 0.75rem;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.charge-result.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(2px);
 }
 
 /* Drag + drop visual helpers */

@@ -25,6 +25,7 @@ chargingStation.addEventListener('drop', (e) => {
   chargingStation.classList.remove('dragover');
 
   const robotId = e.dataTransfer.getData('text/plain');
+  
   const bot = activeBots.find((b) => b.id === robotId);
   if (!bot) return;
 
@@ -36,7 +37,21 @@ chargingStation.addEventListener('drop', (e) => {
     robotDiv.classList.remove('critical-power');
   }
 
-  alert(result);
+  // green status to show charged fully
+  let res = chargingStation.querySelector('.charge-result');
+  if (!res) {
+    res = document.createElement('span');
+    res.className = 'charge-result';
+    chargingStation.appendChild(res);
+  }
+
+  res.textContent = result;
+  res.classList.add('visible');
+
+  // hide status after a short delay (so it doesn't stack forever)
+  window.setTimeout(() => {
+    res.classList.remove('visible');
+  }, 2400);
 });
 
 console.log("active bots: ", activeBots);

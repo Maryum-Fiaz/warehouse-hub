@@ -18,6 +18,7 @@ export class WarehouseHub {
     }
 }
 
-// Keep one global WarehouseHub that manages all activeBots.
 
+// TODO :
+// Keep one global WarehouseHub that manages all activeBots.
 // Use the Hub for "Mass Actions" (like a "Start All" button in the sidebar).
