@@ -1,4 +1,4 @@
-import { addRobot, activeBots } from "./utils.js";
+import { addRobot, activeBots } from "./addRobots.js";
 import { handleShiftToggle } from "./controls.js";
 import { ChargingStation } from "./classes/chargingStation.js";
 import { WarehouseHub } from "./classes/warehouse.js";
