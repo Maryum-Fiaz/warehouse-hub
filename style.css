@@ -555,6 +555,17 @@ header h1 {
     white-space: nowrap;
 }
 
+/* Drag + drop visual helpers */
+#charging-station.dragover {
+  border-color: var(--accent);
+  box-shadow: 0 0 16px rgba(58, 143, 255, 0.55);
+}
+
+#charging-station.dragover p {
+  border-color: rgba(58, 143, 255, 0.55);
+  color: rgba(140, 170, 200, 0.8);
+}
+
 
 /* ─── RESPONSIVE ─────────────────────────────────────────────────────
    At 820px, a 300px sidebar + grid side-by-side stops fitting.

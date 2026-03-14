@@ -68,7 +68,17 @@ function renderRobotToFloor(botInstance){
 
             // dataset to class robot-sprite
             robot.dataset.id = botInstance.id;
-            
+
+            // allow dragging into the charging station
+            robot.draggable = true;
+            robot.addEventListener('dragstart', (e) => {
+                e.dataTransfer.setData('text/plain', botInstance.id);
+                e.dataTransfer.effectAllowed = 'move';
+                robot.classList.add('dragging');
+            });
+            robot.addEventListener('dragend', () => {
+                robot.classList.remove('dragging');
+            });
 
             // title to show information about bot
             const info = botInstance.constructor.name === 'Loader' ? `Lifting: ${botInstance.maxWeight} kg` : `Moving: ${botInstance.speed} km/h`;

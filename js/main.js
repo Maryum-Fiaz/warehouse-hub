@@ -10,6 +10,35 @@ const robotHouse = document.getElementById("robot-house");
 const addBot = document.querySelectorAll(".addBot");
 const chargingStation = document.getElementById('charging-station');
 
+// Drag + drop charging
+chargingStation.addEventListener('dragover', (e) => {
+  e.preventDefault();
+  chargingStation.classList.add('dragover');
+});
+
+chargingStation.addEventListener('dragleave', () => {
+  chargingStation.classList.remove('dragover');
+});
+
+chargingStation.addEventListener('drop', (e) => {
+  e.preventDefault();
+  chargingStation.classList.remove('dragover');
+
+  const robotId = e.dataTransfer.getData('text/plain');
+  const bot = activeBots.find((b) => b.id === robotId);
+  if (!bot) return;
+
+  const station = new ChargingStation(bot);
+  const result = station.serviceRobot();
+
+  const robotDiv = document.querySelector(`.robot-sprite[data-id="${robotId}"]`);
+  if (robotDiv) {
+    robotDiv.classList.remove('critical-power');
+  }
+
+  alert(result);
+});
+
 console.log("active bots: ", activeBots);
 
 // ************** EVENT LISTENERS  ****************
