@@ -1,21 +1,7 @@
-/*
-  ═══════════════════════════════════════════════════════════════════
-  WAREHOUSE HUB — COMMAND CENTER  |  style.css
-  ═══════════════════════════════════════════════════════════════════
 
-  FONT CHOICE:
-  - 'Orbitron'        → titles, buttons, headings (geometric sci-fi)
-  - 'Share Tech Mono' → body text, inputs (monospace terminal feel)
-*/
 
 @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700&display=swap');
 
-
-/* ─── RESET ──────────────────────────────────────────────────────────
-   box-sizing: border-box means padding + border are INCLUDED in width.
-   Without this, adding padding makes elements wider than expected.
-   We apply it to everything with the * universal selector.
-*/
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -23,12 +9,7 @@
 }
 
 
-/* ─── DESIGN TOKENS (CSS Custom Properties) ──────────────────────────
-   We define all colors once here as --variable-name.
-   Why? If you want to change the blue accent to green, you change
-   ONE line here instead of hunting through the whole file.
-   Access them anywhere with var(--variable-name).
-*/
+/* ─── DESIGN TOKENS (CSS Custom Properties) ────────────────────────── */
 :root {
   --bg:          #0b0f14;                  /* darkest background */
   --panel-bg:    #141a22;                  /* panel surface */
@@ -43,17 +24,6 @@
   --grid-line:   rgba(50, 80, 120, 0.4);  /* subtle grid lines */
 }
 
-
-/* ─── BODY + SCANLINE OVERLAY ────────────────────────────────────────
-   body::before is a PSEUDO-ELEMENT — a fake element created purely
-   in CSS without touching the HTML. It floats above everything
-   (z-index: 9999) and covers the whole screen (position:fixed, inset:0).
-   pointer-events:none lets mouse clicks pass straight through it.
-
-   The scanline pattern uses repeating-linear-gradient:
-   every 4px it draws a barely-visible dark blue stripe,
-   mimicking the horizontal lines on old CRT monitors.
-*/
 body {
   background: var(--bg);
   color: var(--text);
@@ -81,14 +51,7 @@ body::before {
 }
 
 
-/* ─── HEADER ─────────────────────────────────────────────────────────
-   header::after creates a decorative glowing underline.
-   It's positioned at bottom:-1px so it overlaps the border-bottom.
-   The gradient goes transparent → accent → transparent for a
-   center-glow look rather than a flat line.
-   position:relative on header is REQUIRED so ::after positions
-   relative to the header, not the whole page.
-*/
+/* ─── HEADER ───── */
 header {
   text-align: center;
   padding-bottom: 12px;
@@ -123,12 +86,7 @@ header h1 {
 }
 
 
-/* ─── DASHBOARD LAYOUT ───────────────────────────────────────────────
-   CSS Grid with two columns:
-   - sidebar: fixed 300px
-   - warehouse floor: 1fr (takes all remaining space)
-   flex:1 makes the dashboard grow to fill the remaining page height.
-*/
+/* ─── DASHBOARD LAYOUT ─── */
 .dashboard {
   display: grid;
   grid-template-columns: 300px 1fr;
@@ -143,17 +101,7 @@ header h1 {
 }
 
 
-/* ─── ZONE PANEL ─────────────────────────────────────────────────────
-   The reusable "metal plate" style for robot-house and charging-station.
-
-   position:relative is CRITICAL — it's what lets the .bolt children
-   use position:absolute to anchor to this panel's own corners.
-   Without it, absolute children would anchor to the page instead.
-
-   The box-shadow has two layers:
-   - inset shadows darken the inner edges → creates a recessed depth look
-   - outer shadow lifts the panel off the dark background
-*/
+/* ─── ZONE PANEL ─── */
 .zone {
   background: linear-gradient(160deg, var(--panel-light) 0%, var(--panel-bg) 100%);
   border: 3px solid var(--border-mid);
@@ -201,23 +149,7 @@ header h1 {
 }
 
 
-/* ─── BOLT / SCREW CORNERS ───────────────────────────────────────────
-   WHY WE NEED HTML FOR THIS:
-   A panel needs 4 corner bolts.
-   CSS only gives us 2 pseudo-elements per element (::before and ::after).
-   So the cleanest solution is 4 <span class="bolt tl/tr/bl/br"> in HTML.
-
-   HOW THE METALLIC LOOK WORKS:
-   radial-gradient(circle at 35% 35%, ...) simulates a round light source
-   hitting the bolt from the top-left:
-   - bright spot at 35% 35% = the catch-light (light reflection)
-   - mid tone in the middle = the bolt body
-   - dark edge at 100% = the shadow rim
-
-   box-shadow adds two effects:
-   - outer drop shadow (0 2px 4px dark) → makes the bolt look raised
-   - inset top highlight (inset 0 1px 0 white) → reinforces the 3D feel
-*/
+/* ─── BOLT ─── */
 .bolt {
   position: absolute;
   width: 10px;
@@ -243,15 +175,7 @@ header h1 {
 .bolt.br { bottom: 7px; right: 7px; }
 
 
-/* ─── BUTTONS ────────────────────────────────────────────────────────
-   .addBot has its own mini screws using ::before (top-left) and
-   ::after (top-right). Since buttons only need 2 screws at the top,
-   pseudo-elements are enough — no extra HTML needed here.
-
-   The hover glow uses a large-blur box-shadow. You can't directly
-   animate a glowing border, but box-shadow with a big blur radius
-   creates the same visual effect and IS animatable via transition.
-*/
+/* ─── BUTTONS ── */
 .addBot {
   display: block;
   width: 100%;
@@ -312,22 +236,7 @@ header h1 {
   transform: scale(0.97);   /* subtle press-down feel */
 }
 
-/* ─── WAREHOUSE FLOOR ────────────────────────────────────────────────
-   Same bolt technique as .zone (position:relative + .bolt children).
-
-   The grid is built directly on this element with CSS Grid.
-   grid-template-columns: repeat(5, 1fr) = 5 equal columns
-   grid-template-rows:    repeat(5, 1fr) = 5 equal rows
-
-   The background uses LAYERED GRADIENTS (comma-separated = stacked):
-   Layer 1 (top): radial glow at center for atmospheric depth
-   Layer 2: vertical lines via repeating-linear-gradient at 90deg
-   Layer 3: horizontal lines via repeating-linear-gradient at 0deg
-   Layer 4 (bottom): base dark panel gradient
-   
-   calc(100% / 5) spaces lines exactly 1/5th of the panel width apart,
-   matching the 5-column grid perfectly.
-*/
+/* ─── WAREHOUSE FLOOR ── */
 #warehouse-floor {
   position: relative;
   border: 3px solid var(--border-mid);
@@ -349,12 +258,7 @@ header h1 {
 }
 
 
-/* ─── MODAL OVERLAY ──────────────────────────────────────────────────
-   JS appends a div.properties to body. We style it here.
-   position:fixed + inset:0 = covers the entire viewport always.
-   backdrop-filter:blur() blurs everything behind it (glassmorphism).
-   display:flex centers the .model card inside.
-*/
+/* ─── MODAL OVERLAY ─── */
 .properties {
   position: fixed;
   inset: 0;
@@ -368,10 +272,7 @@ header h1 {
 }
 
 
-/* ─── MODAL CARD ─────────────────────────────────────────────────────
-   Same structure as .zone — position:relative so .bolt children work.
-   The accent border + outer glow makes it feel like an active terminal.
-*/
+/* ─── MODAL CARD ─── */
 .model {
   width: 320px;
   background: linear-gradient(160deg, var(--panel-light) 0%, var(--panel-bg) 100%);
@@ -394,11 +295,7 @@ header h1 {
   text-shadow: 0 0 12px var(--accent-glow);
 }
 
-/* ─── INPUT ──────────────────────────────────────────────────────────
-   On focus, box-shadow creates a glow around the input.
-   You can't glow a border directly, but box-shadow with a large blur
-   achieves the same effect and can be transitioned smoothly.
-*/
+/* ─── INPUT ─── */
 .model input {
   background: #0a1018;
   border: 1.5px solid var(--accent);
@@ -428,16 +325,12 @@ header h1 {
 }
 
 
-/* ─── ROBOT SPRITE ───────────────────────────────────────────────────
-   JS renders robots into grid cells. Whatever element it creates
-   should get class="robot-sprite". We size it to fill the cell
-   (width/height 100%) and give it the glowing unit look.
-*/
+/* ─── TILES / ROBOT SPRITE ──── */
 
 .tile {
     width: 100%;
     height: 100%;
-    display: flex; /* Helps center the robot inside */
+    display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
@@ -446,7 +339,6 @@ header h1 {
 .robot-sprite {
   width: 100%;
   height: 100%;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -460,9 +352,9 @@ header h1 {
 }
 
 .robot-sprite img {
-    max-width: 60%; /* Scales image to 60% of the tile size */
+    max-width: 60%;
     max-height: 60%;
-    object-fit: contain; /* Keeps the aspect ratio so it doesn't look stretched */
+    object-fit: contain;
     display: block;
     transition: box-shadow 0.15s;
 }
@@ -480,7 +372,7 @@ header h1 {
   right: -5px;
   background-color: var(--panel-bg);
   border: 1px solid var(--accent);
-  /*Usingaccentforroboticglow*/color: var(--accent);
+  color: var(--accent);
   padding: 4px 9px;
   font-size: 0.9rem;
   cursor: pointer;
@@ -493,7 +385,7 @@ header h1 {
 }
 
 .working-border {
-    /*Theborderandaheavyouterglowshadow*/border: 1.5px solid var(--accent);
+    border: 1.5px solid var(--accent);
     box-shadow: 0 0 10px var(--accent), inset 0 0 5px var(--accent);
     animation: glow-blink 2s ease-in-out infinite;
     -webkit-animation: glow-blink 0.s ease-in-out infinite;
@@ -507,8 +399,8 @@ header h1 {
     }
     50% { 
         opacity: 0.6; 
-        filter: brightness(1.5); /* Makes the blue/gray look "electric" */
-        box-shadow: 0 0 15px var(--accent); /* Shadow grows */
+        filter: brightness(1.5);
+        box-shadow: 0 0 15px var(--accent);
     }
     100% { 
         opacity: 1; 
@@ -531,7 +423,6 @@ header h1 {
     100% { opacity: 1; }
 }
 
-/* Add a little floating icon using ::after */
 .critical-power::after {
     content: "⚠️ LOW BATT";
     position: absolute;

@@ -30,7 +30,6 @@ export function addRobot(name) {
     `
 
     document.body.appendChild(inputDiv);
-    console.log(`${name} clicked!`);
     
     document.getElementById('confirm-bot').onclick = () => {
         const specValue = document.getElementById('robot-spec').value;
@@ -38,7 +37,6 @@ export function addRobot(name) {
 
 
         const botInstance = new config.class(null, 100, specValue, `/assets/${name}.png`);
-        console.log("Success:", botInstance.status());
         
         // Final Step: Show it on the floor
         renderRobotToFloor(botInstance);
@@ -54,7 +52,6 @@ export function addRobot(name) {
 function renderRobotToFloor(botInstance){
 
     const tiles = document.querySelectorAll('.tile');
-    console.log(`I am a function to render ${botInstance.constructor.name}`);
 
 
     for(let tile of tiles){
